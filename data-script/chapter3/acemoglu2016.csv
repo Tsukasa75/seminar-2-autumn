@@ -1,0 +1,480 @@
+sic87dd_desc,manuf,sic3,dL,dIMP,dIMPoth
+Agriculture,0,710,2.4707582,,
+Veterinary services,0,740,4.01864,,
+Landscape and horticultural services,0,780,3.1929722,,
+Forestry,0,800,-1.350214,,
+"Fishing, hunting, and trapping",0,900,-1.783013,,
+Iron and ferroalloy ores,0,1010,-1.0589862,,
+Copper ores,0,1020,-1.4556257,,
+Misc. metal ores,0,1030,-.9635058,,
+Coal and petroleum,0,1221,.9628467,,
+Stone,0,1410,.36448023,,
+Sand and gravel,0,1442,-1.4497092,,
+Clay and related minerals,0,1455,-5.0051851,,
+Chemical and fertilizer mining,0,1474,-3.1344748,,
+Construction,0,1510,.41077384,,
+Meat packing plants,1,2010,1.0834169,.0081761517,.02997466
+Poultry slaughtering and processing,1,2010,1.0873411,.0041325968,.16253057
+Creamery butter,1,2020,.11128136,0,0
+"Cheese, natural and processed",1,2020,1.1542108,5.9900310e-07,-9.1443252e-07
+"Dry, condensed, evaporated  products",1,2020,.1536452,.010602531,.031408049
+Ice cream and frozen desserts,1,2020,.22949457,.0010755587,.0051698075
+Fluid milk,1,2020,-1.0465448,.00014866979,.00050015829
+Canned specialties,1,2030,-2.5031774,.0026381346,.0034486339
+Canned fruits and vegetables,1,2030,-1.3412344,.12500307,.16324732
+"Dehydrated fruits, vegetables, soups",1,2030,.53676623,.26386228,.46833277
+"Pickles, sauces, and salad dressings",1,2030,.25098184,.030559236,.03925344
+Frozen fruits and vegetables,1,2030,-2.1869433,.29162523,.43320045
+Flour and other grain mill products,1,2040,-.93376428,.002522408,.0061128526
+Cereal breakfast foods,1,2040,-.47654355,.00079102546,.020346252
+Rice milling,1,2040,-.50666839,.016382724,.081088193
+Prepared flour mixes and doughs,1,2040,1.7122216,.00015422644,.024601158
+Wet corn milling,1,2040,-1.3212088,.0091384109,.095787778
+Dog and cat food,1,2040,2.5578647,.14993408,.078731433
+"Prepared feeds, n.e.c.",1,2040,-1.3770748,.014483464,.019814124
+"Bread, cake, and related products",1,2050,-.66919303,.0074624801,.023202119
+Cane sugar refining,1,2060,-2.0052342,.0032552942,-.015377698
+Candy and other confectionery products,1,2060,-.79713166,.051868893,.047551066
+Chocolate and cocoa products,1,2060,-2.5503895,-.015307252,.054907799
+Salted and roasted nuts and seeds,1,2060,1.9644567,.089368425,.087908223
+Cottonseed oil mills,1,2070,-3.3135343,.00043849656,-.21360497
+Soybean oil mills,1,2070,-.22896549,.010147898,.0033611488
+"Vegetable oil mills, n.e.c.",1,2070,-1.140754,.050968211,-.5166201
+Animal and marine fats and oils,1,2070,.25008044,.18484449,.08572904
+"Edible fats and oils, n.e.c.",1,2070,-.64832705,.0026608971,.0015149892
+Malt beverages,1,2080,-1.5348451,-.00088211411,.0017748673
+Malt,1,2080,-1.8214684,-.000057454559,-.0023761182
+"Wines, brandy, and brandy spirits",1,2080,4.6159892,.0013002874,.0055773025
+Distilled and blended liquors,1,2080,-.52364862,.0064848722,.0082590561
+Bottled and canned soft drinks,1,2080,-1.6124589,.001839205,-.00034520394
+"Flavoring extracts and syrups, n.e.c.",1,2080,1.5409272,.0048944722,.014388303
+Canned and cured fish and seafoods,1,2090,-6.2513375,.93187845,3.5457809
+Roasted coffee,1,2090,.20820728,.0007765232,.0034767662
+Potato chips and similar snacks,1,2090,-1.0719924,.0020110956,.012194274
+Manufactured ice,1,2090,-.012146758,0,.0010744714
+Macaroni and spaghetti,1,2090,-2.9958386,.078053355,.11936174
+"Food preparations, n.e.c.",1,2090,1.8206565,.052963883,.11994014
+Cigarettes,1,2110,-6.3390303,.001350647,.0050154757
+Cigars,1,2120,1.9235955,0,.002889601
+Chewing and smoking tobacco,1,2130,-2.3130157,.00024332185,.00027354871
+Tobacco stemming and redrying,1,2140,-4.0108919,0,9.6698914e-06
+"Broadwoven fabric mills, cotton",1,2210,-9.642169,.0078769084,-.017906891
+"Broadwoven fabric mills, manmade",1,2220,-8.6151218,.094870731,.074310109
+"Broadwoven fabric mills, wool",1,2230,-9.757247,.019599643,.16091493
+Narrow fabric mills,1,2240,-5.2865095,.47001401,.38450167
+"Hosiery, n.e.c.",1,2250,-9.1403303,.6967808,1.1661975
+Weft knit fabric mills,1,2250,-10.441707,.14756767,-.013350395
+Lace and warp knit fabric mills,1,2250,-5.7200742,.017673586,.012939875
+Carpets and rugs,1,2270,-2.3761888,.11385318,.091043897
+Yarn spinning mills,1,2280,-8.2481623,.023368103,.068350188
+Thread mills,1,2280,-4.2930918,.047774095,.14723018
+"Coated fabrics, not rubberized",1,2290,-1.9881297,.64671022,.445611
+Tire cord and fabrics,1,2290,-3.587368,.064991832,.13556676
+Nonwoven fabrics,1,2290,-.51211625,.17340016,.23602906
+Cordage and twine,1,2290,-3.7512617,.93102771,.75825489
+"Textile goods, n.e.c.",1,2290,-3.1627305,.19888139,.53472465
+Men's and boys' suits and coats,1,2310,-10.831221,.97947627,1.1167452
+Men's and boys' shirts,1,2320,-11.380991,1.1219699,1.6601963
+Men's and boys' underwear and nightwear,1,2320,-13.723859,1.8887527,3.5544155
+Men's and boys' neckwear,1,2320,-9.5967951,.86197519,.47527796
+Men's and boys' trousers and slacks,1,2320,-11.428803,.46394452,.97305644
+"Men's and boys' clothing, n.e.c.",1,2320,-9.0823154,.90963757,1.6683314
+Women's and misses' blouses and shirts,1,2330,-8.5724182,.38090277,1.6166048
+"Women's, junior's, and misses' dresses",1,2330,-9.3995075,1.1281159,.95526421
+Women's and misses' suits and coats,1,2330,-11.853952,1.2708671,2.0178845
+"Women's and misses' outerwear, n.e.c.",1,2330,-9.09939,1.1684279,1.2417099
+Women's and children's underwear,1,2340,-16.866831,1.2431946,1.1467521
+"Hats, caps, and millinery",1,2350,-8.669385,2.7395461,2.1277366
+"Girls' and children's outerwear, n.e.c.",1,2360,-14.311014,2.5716043,5.7606254
+Fur goods,1,2370,-9.6946144,.63122684,.62821013
+Fabric dress and work gloves,1,2380,-7.3913951,1.7085075,2.4376512
+Robes and dressing gowns,1,2380,-13.186121,.21168706,.15461853
+Waterproof outerwear,1,2380,-14.658198,10.934087,7.69069
+Leather and sheep-lined clothing,1,2380,-7.9436359,.048534203,.14842291
+"Apparel and accessories, n.e.c.",1,2380,-6.859623,2.0974574,1.2509089
+Curtains and draperies,1,2390,-6.5200658,1.6029272,.80185997
+"Housefurnishings, n.e.c.",1,2390,-5.6073904,2.4082994,2.0166709
+Textile bags,1,2390,-4.6190495,1.2069695,1.5488169
+Canvas and related products,1,2390,-.42700836,1.250334,.68333256
+Pleating and stitching,1,2390,-4.2177377,.15444586,-.02418028
+Automotive and apparel trimmings,1,2390,.2678,.023856901,.0074168569
+"Fabricated textile products, n.e.c.",1,2390,-2.7442942,1.6040432,1.5533595
+Logging,1,2410,-2.584034,.0058223652,-.040118907
+"Sawmills and planing mills, general",1,2420,-2.3782473,.013470342,.0078249769
+Hardwood dimension and flooring mills,1,2420,-1.4023272,.23797671,.26900813
+"Special product sawmills, n.e.c.",1,2420,-3.7371511,.0010584434,.0029078838
+Millwork,1,2430,-1.1491845,.069625244,.096507534
+Wood kitchen cabinets,1,2430,.33907157,.25606403,.030061608
+Hardwood veneer and plywood,1,2430,-2.1122844,1.1339065,.31101233
+Softwood veneer and plywood,1,2430,-3.5155702,.11782677,.19052465
+"Structural wood members, n.e.c.",1,2430,.13777497,.47962984,.13015902
+Wood pallets and skids,1,2440,1.4565873,.00036912775,.004729853
+"Wood containers, n.e.c.",1,2440,-.64617884,.021420695,.075925454
+Mobile homes,1,2450,-2.7737899,.000068116162,.0026640138
+Prefabricated wood buildings,1,2450,-1.3568476,.022324288,.0956835
+Wood preserving,1,2490,-.88582176,.000092558854,.00014155275
+Reconstituted wood products,1,2490,-1.7949448,.31634307,.065653339
+"Wood products, n.e.c.",1,2490,-1.8223182,.92468989,1.2286462
+Metal household furniture,1,2510,-5.3123221,1.4696536,.73998082
+Mattresses and bedsprings,1,2510,-.51671207,.38137597,.33479723
+Wood TV and radio cabinets,1,2510,-6.0718393,.023177918,.0062792646
+"Office furniture, except wood",1,2520,-3.6576741,.03515704,.019629726
+"Partitions and fixtures, except wood",1,2540,-3.1688938,.85167968,.29387397
+Drapery hardware and blinds and shades,1,2590,-2.1319656,.7993356,.19482933
+"Furniture and fixtures, n.e.c.",1,2590,-2.5142004,1.6045567,.70315272
+Pulp mills,1,2610,-3.5548065,.017614376,.024037596
+Paper mills,1,2620,-2.5986743,.020020949,.052817594
+Setup paperboard boxes,1,2650,-5.6050115,.58807886,.28268063
+Corrugated and solid fiber boxes,1,2650,-1.2322161,.036639895,.014725615
+"Fiber cans, drums and similar products",1,2650,-3.4709013,.00098330306,.0012708695
+Sanitary food containers,1,2650,-1.8520937,.15271157,.15361106
+Folding paperboard boxes,1,2650,-1.6050885,.065139867,.059751935
+"Paper coated and laminated, n.e.c.",1,2670,-1.5331783,.096997604,.10479975
+"Bags: plastics, laminated, and coated",1,2670,-.64077502,.69513059,.73253399
+Bags: uncoated paper and multiwall,1,2670,-3.7632184,.061349064,.044921119
+Die-cut paper and board,1,2670,-2.7499759,1.0443467,.14987555
+Sanitary paper products,1,2670,-1.382858,.09412244,.066122137
+Envelopes,1,2670,-3.362185,.031610608,.02308644
+Stationery products,1,2670,-4.9266748,.076184168,.02923736
+"Converted paper products, n.e.c.",1,2670,-2.1063228,.13001838,.13569434
+Newspapers,1,2710,-2.6971314,9.5771047e-06,7.5566022e-06
+Periodicals,1,2720,.3563695,.00031987583,.00069729786
+Book publishing,1,2730,-1.1091739,.12283804,.06199351
+Miscellaneous publishing,1,2740,.73162442,.0033718632,.0055063441
+"Commercial printing, lithographic",1,2750,-2.0524848,.040113132,.018223107
+Manifold business forms,1,2760,-7.9388881,.00082907022,.0027668532
+Greeting cards,1,2770,-2.5597391,.30704492,.060445003
+Blankbooks and looseleaf binders,1,2780,-4.7011528,.36555314,.19106527
+Platemaking services,1,2790,-7.055326,.00013309017,.0030314024
+Alkalies and chlorine,1,2810,1.0938003,.18805543,.069598354
+Industrial gases,1,2810,-1.3708763,.0011575469,.00024388761
+Inorganic pigments,1,2810,-2.0044894,.32921904,.30992484
+"Industrial inorganic chemicals, n.e.c.",1,2810,-4.2893667,.38470963,1.1165068
+Plastics materials and resins,1,2820,.067188449,.084108539,.098716788
+Synthetic rubber,1,2820,-1.1079433,.12814447,.11012435
+Cellulosic manmade fibers,1,2820,-10.791271,.17896846,.07136815
+"Organic fibers, noncellulosic",1,2820,-4.7287855,.11043161,.090409815
+Medicinals and botanicals,1,2830,3.1335888,.8380273,1.2537235
+Pharmaceutical preparations,1,2830,-.37095374,.0078579439,.023163164
+Diagnostic substances,1,2830,2.5447009,.21427841,.078296565
+Biological products except diagnostic,1,2830,4.4712892,.035401236,.033098038
+Soap and other detergents,1,2840,-2.1991351,.054594643,.078753725
+Polishes and sanitation goods,1,2840,-2.419838,.007278563,.017879656
+Surface active agents,1,2840,-2.378067,.020002304,.058997877
+Toilet preparations,1,2840,-.60104185,.13695261,.070937268
+Paints and allied products,1,2850,-2.1366904,.011444998,.017192679
+Gum and wood chemicals,1,2860,-.16322263,.36401159,2.2737684
+Cyclic crudes and intermediates,1,2860,-4.3879428,.14629462,.3245258
+"Industrial organic chemicals, n.e.c.",1,2860,-.9799431,.24816425,.29446307
+Nitrogenous fertilizers,1,2870,-2.6830716,.76586354,.090171441
+Phosphatic fertilizers,1,2870,-1.2124085,.015941314,.31639388
+"Agricultural chemicals, n.e.c.",1,2870,-3.3806891,.11385176,.20901744
+Adhesives and sealants,1,2890,-.86956459,.039095663,.05004511
+Explosives,1,2890,-3.3863003,.0063538081,.058342349
+Printing ink,1,2890,-.23854284,.0061707008,.039722603
+Carbon black,1,2890,-.69259292,.20897953,.31986758
+"Chemical preparations, n.e.c.",1,2890,-.80547643,.13551426,.16386543
+Petroleum refining,1,2910,-1.0129018,.0028076135,.010258331
+Asphalt paving mixtures and blocks,1,2950,.73518711,.00017844225,.000014554493
+Asphalt felts and coatings,1,2950,-1.8858765,.0010316368,.00063669344
+Lubricating oils and greases,1,2990,-.64606273,.000034141965,.0024176945
+"Petroleum and coal products, n.e.c.",1,2990,-1.1307774,1.1760278,1.9619856
+Tires and inner tubes,1,3010,-2.0879233,.76919258,.36313549
+Rubber and plastics footwear,1,3020,-8.1799946,3.0676434,8.589654
+Rubber and plastics hose and belting,1,3050,-1.4621439,.64077508,.43512636
+"Gaskets, packing, and sealing devices",1,3050,-.31902391,.37492812,.38285112
+"Fabricated rubber products, n.e.c.",1,3060,-2.6388037,.31667501,.27544612
+Unsupported plastics film and sheet,1,3080,-1.7729883,.10350702,.16521308
+Unsupported plastics profile shapes,1,3080,-1.9320885,.035559531,.031409658
+Laminated plastics plate and sheet,1,3080,-2.2651081,.020094622,.026951691
+Plastics pipe,1,3080,.67337227,.0039904928,.010938349
+Plastics bottles,1,3080,1.1424173,.18016294,.10824337
+Plastics plumbing fixtures,1,3080,3.9366176,.10936234,.32326305
+"Plastics products, n.e.c.",1,3080,-.92208064,.43843198,.31642511
+Leather tanning and finishing,1,3110,-6.8718762,.023517702,.031907771
+Footwear cut stock,1,3130,-9.4826994,.35108215,1.0298675
+House slippers,1,3140,-38.32082,.2145206,.29775053
+"Men's footwear, except athletic",1,3140,-7.3920155,2.4147427,.62413341
+"Women's footwear, except athletic",1,3140,-10.056058,7.5262985,1.4147348
+"Footwear, except rubber, n.e.c.",1,3140,-10.398383,3.2324479,.70831364
+Leather gloves and mittens,1,3150,-9.810154,1.4913404,.39612448
+Luggage,1,3160,-6.7879887,5.7948236,5.7713876
+Women's handbags and purses,1,3170,-4.8913932,2.5026157,1.7266161
+"Personal leather goods, n.e.c.",1,3170,-4.4628067,2.8521969,2.4599164
+"Leather goods, n.e.c.",1,3190,-1.640654,1.9320259,.84390181
+Flat glass,1,3210,-1.8205203,.44940168,.17141834
+Glass containers,1,3220,-4.7260904,.16342685,.041056387
+"Pressed and blown glass, n.e.c.",1,3220,-3.6244471,.64691001,.49770093
+Products of purchased glass,1,3230,-1.0074846,.36653954,.39903668
+"Cement, hydraulic",1,3240,-1.4187049,.038332313,.024423068
+Brick and structural clay tile,1,3250,-3.6050482,.003855797,.01093458
+Ceramic wall and floor tile,1,3250,-3.5407996,.80026549,.90549165
+Clay refractories,1,3250,-3.2679505,.34055516,.30026975
+"Structural clay products, n.e.c.",1,3250,-1.6273197,.01794247,.032898154
+Vitreous plumbing fixtures,1,3260,-6.4345255,1.5595914,.43654546
+Vitreous china table and kitchenware,1,3260,-5.9553652,.62720191,2.177526
+Semivitreous table and kitchenware,1,3260,-8.368022,1.8001953,.2727738
+Porcelain electrical supplies,1,3260,-3.5819352,.67502964,1.0908425
+"Pottery products, n.e.c.",1,3260,-5.169229,2.8830888,.90381014
+Concrete block and brick,1,3270,-.23265763,.00041172738,.0086117052
+"Concrete products, n.e.c.",1,3270,-.45702702,.23402517,.041096337
+Ready-mixed concrete,1,3270,-.91348219,2.6774185e-06,1.1726436e-06
+Lime,1,3270,-.63124067,.000799698,.059414309
+Gypsum products,1,3270,-1.887113,.0026535979,.0043084933
+Cut stone and stone products,1,3280,2.603961,.97552651,2.1406808
+Abrasive products,1,3290,-2.6420045,.36853725,.51311052
+"Minerals, ground or treated",1,3290,-1.6043749,.45603251,.91438866
+Mineral wool,1,3290,-1.363685,.033662885,.06372916
+Nonclay refractories,1,3290,-3.0934279,.26519459,.57014984
+"Nonmetallic mineral products, n.e.c.",1,3290,-3.1994164,.35990828,.30089274
+Blast furnaces and steel mills,1,3310,-2.7725916,.10171386,.14289053
+Electrometallurgical products,1,3310,-3.4796648,.24903885,.65187955
+Steel wire and related products,1,3310,-2.7352378,.36688164,.28910398
+Gray and ductile iron foundries,1,3320,-3.1634891,.075633153,.085740998
+Primary copper,1,3330,-4.7223964,.0021537058,.034037799
+Primary aluminum,1,3330,-5.6103506,.0032650107,.35428864
+"Primary nonferrous metals, n.e.c.",1,3330,-1.5139302,.055077147,.30568999
+Copper rolling and drawing,1,3350,-2.9023001,.09586744,.11983548
+"Aluminum sheet, plate, and foil",1,3350,-2.4156237,.17012632,.099940293
+Aluminum extruded products,1,3350,-1.7142951,.023518804,.16554809
+"Nonferrous rolling and drawing, n.e.c.",1,3350,-.85771173,.31120825,.53866798
+Nonferrous wiredrawing and insulating,1,3350,-1.49575,.69978058,.5974108
+Aluminum foundries,1,3360,-1.5354193,.031481646,.021262541
+"Primary metal products, n.e.c.",1,3390,-.54913247,.16624762,.35257739
+Metal cans,1,3410,-3.2829721,.0026307807,.0039772275
+"Metal barrels, drums, and pails",1,3410,-3.4501398,.33101144,.29985458
+Cutlery,1,3420,-3.1290479,2.0895362,1.5213732
+"Hand and edge tools, n.e.c.",1,3420,-3.1991012,.84029114,.41539493
+Saw blades and handsaws,1,3420,-1.8351303,.58942062,.39708567
+"Hardware, n.e.c.",1,3420,-4.2421865,.6939739,.51846945
+Metal sanitary ware,1,3430,-4.6822762,1.1289642,.62815845
+Plumbing fixture fittings and trim,1,3430,-3.2193201,.040309384,.029583365
+"Heating equipment, except electric",1,3430,-.81722385,.43178925,.11995262
+Fabricated structural metal,1,3440,.13741101,.087529086,.19789985
+"Metal doors, sash, and trim",1,3440,-1.5811944,.25695705,.35293055
+Fabricated plate work (boiler shops),1,3440,.18897407,.29414612,.20242795
+Sheet metalwork,1,3440,-.15353146,.0040246593,.018343862
+Architectural metal work,1,3440,.23326795,.01282801,.065161958
+Prefabricated metal buildings,1,3440,.082807474,.012006793,.058277257
+Miscellaneous metal work,1,3440,1.4949005,.16370018,.65884852
+"Bolts, nuts, rivets, and washers",1,3450,-1.9833655,.52474469,.37007013
+Iron and steel forgings,1,3460,-1.5767132,.062037487,.028497938
+Automotive stampings,1,3460,-1.438607,.0068749189,.0027316972
+Crowns and closures,1,3460,-3.0015063,.44415903,.089968659
+"Metal stampings, n.e.c.",1,3460,-2.6309211,.14337954,.10431341
+Small arms ammunition,1,3480,-3.6024644,.013496283,.00066582969
+Small arms,1,3480,.82559812,.35912439,.044873945
+"Ordnance and accessories, n.e.c.",1,3480,-9.1228962,-.0098705636,-.0003471369
+Industrial valves,1,3490,-1.8172913,.22539023,.16011345
+Fluid power valves and hose fittings,1,3490,.69492197,.70912045,.44570622
+"Steel springs, except wire",1,3490,-1.8163103,.16928189,.24738021
+"Valves and pipe fittings, n.e.c.",1,3490,-.8547647,1.7291691,1.4762805
+Misc. fabricated wire products,1,3490,-2.5904403,.54827797,.42088327
+Metal foil and leaf,1,3490,-1.1170524,.19227777,.25415206
+"Fabricated metal products, n.e.c.",1,3490,.34571299,.58216733,.54264843
+Turbines and turbine generator sets,1,3510,1.2117932,.15221366,.13594453
+"Internal combustion engines, n.e.c.",1,3510,-2.3158562,.2490209,.083337344
+Farm machinery and equipment,1,3520,-.91276228,.16111894,.12564677
+Lawn and garden equipment,1,3520,-1.9742813,.072602138,.14145567
+Construction machinery,1,3530,-1.0785372,.31189492,.30359307
+Mining machinery,1,3530,-.96443659,.33464485,.36010426
+Oil and gas field machinery,1,3530,1.1923506,1.612299,.050837129
+Elevators and moving stairways,1,3530,-2.1570199,.22425282,.6658932
+Conveyors and conveying equipment,1,3530,-.71715415,.10703804,.13572761
+"Hoists, cranes, and monorails",1,3530,-.38011757,.35900158,.20416367
+Industrial trucks and tractors,1,3530,.28070024,.64905667,.37133867
+"Machine tools, metal cutting types",1,3540,-3.1434653,.12177341,.30041021
+"Machine tools, metal forming types",1,3540,-3.1488581,.13861649,.26420984
+Industrial patterns,1,3540,-3.8305964,.041772317,.0093621751
+"Special dies, tools, jigs and fixtures",1,3540,-2.3376653,.21102479,.30557045
+Machine tool accessories,1,3540,-2.7591841,.13542025,.11260506
+Power-driven handtools,1,3540,-4.0508294,2.789959,1.5362574
+Rolling mill machinery,1,3540,-1.9303738,.19656757,.11064335
+Welding apparatus,1,3540,-1.3930321,.20869759,.19914912
+"Metalworking machinery, n.e.c.",1,3540,-2.2229359,.020107199,.037592851
+Textile machinery,1,3550,-5.8581219,.81645364,.92862356
+Woodworking machinery,1,3550,-5.5996881,.87442958,.45406938
+Paper industries machinery,1,3550,-4.2083011,.19228968,.1792901
+Printing trades machinery,1,3550,-4.4734073,7.9651804,8.0122633
+Food products machinery,1,3550,-1.0295342,.1464496,.11777838
+"Special industry machinery, n.e.c.",1,3550,-1.3654733,.2000927,.22555728
+Pumps and pumping equipment,1,3560,-.77884376,.70655715,.34753057
+Ball and roller bearings,1,3560,-2.6321931,.43448988,.43312231
+Air and gas compressors,1,3560,-1.1934575,.57601076,.55675191
+Blowers and fans,1,3560,-.61938351,1.6087027,1.1673998
+Packaging machinery,1,3560,-1.2038431,.14577886,.12635124
+"Speed changers, drives, and gears",1,3560,-1.5930829,.84404695,.55612707
+Industrial furnaces and ovens,1,3560,-2.5197256,.082199976,.12739429
+"Power transmission equipment, n.e.c.",1,3560,-2.2077954,.39475432,.35161847
+"General industrial machinery, n.e.c.",1,3560,-1.1730025,1.1241649,.73968768
+Electronic computers,1,3570,-8.6697969,5.7255669,2.1056309
+Computer storage devices,1,3570,-3.6979692,1.3052955,.84819764
+"Computer peripheral equipment, n.e.c.",1,3570,-6.1753421,1.7869329,.88585663
+Calculating and accounting equipment,1,3570,-6.2789159,1.2999221,.71199393
+"Office machines, n.e.c.",1,3570,-7.6397934,.26805088,.36119154
+Automatic vending machines,1,3580,-5.6292553,.30683765,.44079614
+Commercial laundry equipment,1,3580,-1.9618421,.24319021,2.0481308
+Refrigeration and heating equipment,1,3580,-1.1630626,.50224411,.59697491
+Measuring and dispensing pumps,1,3580,-3.3631363,.10108962,.033719003
+"Service industry machinery, n.e.c.",1,3580,-.89770603,.089883119,.042842951
+Fluid power cylinders and actuators,1,3590,-.4106043,.62206846,.37108117
+Fluid power pumps and motors,1,3590,-1.5539361,.8498565,.1684379
+"Scales and balances, exc. laboratory",1,3590,-2.3140337,.98859298,1.1124933
+"Industrial machinery, n.e.c.",1,3590,-.1630677,.071538761,.081892833
+"Transformers, except electronic",1,3610,-2.8293221,.36067471,.32522786
+Switchgear and switchboard apparatus,1,3610,-2.0094221,.17029624,.18591096
+Motors and generators,1,3620,-4.4925532,.84667218,.8146469
+Carbon and graphite products,1,3620,-.84736168,.54959017,.60884684
+Relays and industrial controls,1,3620,-3.1439717,.61178839,.59730065
+"Electrical industrial apparatus, n.e.c.",1,3620,-.8213383,.054198004,.052338161
+Household cooking equipment,1,3630,-3.0843754,2.4449956,.87499255
+Household refrigerators and freezers,1,3630,-4.4193296,.48902279,.79108405
+Household laundry equipment,1,3630,-4.1286187,.097319543,.68247098
+Electric housewares and fans,1,3630,-5.7646551,3.343554,3.4624062
+Household vacuum cleaners,1,3630,-6.3506889,1.9326849,1.9934759
+"Household appliances, n.e.c.",1,3630,-1.8293561,.65800929,1.0502861
+Electric lamps,1,3640,-4.6748929,1.2847196,.56116086
+Current-carrying wiring devices,1,3640,-2.7770436,.63017648,1.0978345
+Noncurrent-carrying wiring devices,1,3640,-1.962085,.19227685,.35833454
+Vehicular lighting equipment,1,3640,-2.500108,.45572847,.35999194
+"Lighting equipment, n.e.c.",1,3640,-1.9006162,2.0387201,1.2757102
+Household audio and video equipment,1,3650,-6.8839946,2.2506871,1.8429817
+Prerecorded records and tapes,1,3650,-4.5430183,1.9397917,.25822327
+Telephone and telegraph apparatus,1,3660,-6.5609317,2.2033553,1.3799306
+Radio and TV communications equipment,1,3660,-2.4117463,4.6570029,3.4181919
+"Communications equipment, n.e.c.",1,3660,-1.4701972,1.4435695,.67598045
+Electron tubes,1,3670,-8.9990778,.025970047,.013296957
+Printed circuit boards,1,3670,-4.612402,.38628289,.89090967
+Semiconductors and related devices,1,3670,-3.0610719,.70254147,1.4555879
+Electronic capacitors,1,3670,-7.3025126,.38842925,.40011731
+Electronic resistors,1,3670,-5.9633045,.69756365,1.1013151
+Electronic coils and transformers,1,3670,-3.831778,1.0281494,2.6564014
+Electronic connectors,1,3670,-2.6302159,.58992445,.46245441
+"Electronic components, n.e.c.",1,3670,-1.4731072,1.7487282,1.6412048
+Storage batteries,1,3690,-.57266504,1.1671576,.86208665
+"Primary batteries, dry and wet",1,3690,-2.7023325,.5525471,.37026864
+Engine electrical equipment,1,3690,-5.1145382,.37248322,.49033111
+Magnetic and optical recording media,1,3690,-13.698049,.49122268,.52958089
+"Electrical equipment and supplies, n.e.c.",1,3690,-4.3472733,2.4398789,1.2943399
+Motor vehicles and car bodies,1,3710,-1.9028399,.0013454781,.0063946238
+Truck and bus bodies,1,3710,-.049923208,.0027909933,.0032553982
+Motor vehicle parts and accessories,1,3710,-1.7986878,.3332732,.16842262
+Truck trailers,1,3710,.16007689,.24283783,.022728352
+Aircraft,1,3720,-2.5795064,.0015891651,.000054382828
+Aircraft engines and engine parts,1,3720,-3.2255821,.04213981,.015804494
+"Aircraft parts and equipment, n.e.c.",1,3720,-3.0808938,.062189169,.010593899
+Ship building and repairing,1,3730,-1.1118361,.00028887967,1.597297
+Boat building and repairing,1,3730,-1.0056914,.056639858,.018254038
+Railroad equipment,1,3740,-.95031029,.15298286,.46331948
+"Motorcycles, bicycles, and parts",1,3750,-.20191787,1.4240773,2.2204142
+Guided missiles and space vehicles,1,3760,-6.8544731,0,1.0940512e-07
+Space propulsion units and parts,1,3760,-4.3221226,.000053078482,.013486681
+Travel trailers and campers,1,3790,2.6159806,.49164754,.34372759
+Tanks and tank components,1,3790,.55238932,-.0002168057,-7.0353417e-06
+"Transportation equipment, n.e.c.",1,3790,2.4204457,.045573846,.066118069
+Search and navigation equipment,1,3810,-3.521733,.094373263,.10819794
+Laboratory apparatus and furniture,1,3820,-1.104499,.000078007084,.00009741971
+Environmental controls,1,3820,-3.2853868,.32265502,.16446833
+Process control instruments,1,3820,-2.0136111,.47337532,.44429168
+Fluid meters and counting devices,1,3820,1.3636525,.3125802,.38416934
+Instruments to measure electricity,1,3820,-4.2846828,.30967131,.2882944
+Analytical instruments,1,3820,.052682716,.26428625,.28366765
+Optical instruments and lenses,1,3820,-1.09041,1.2591052,2.9873495
+"Measuring and controlling devices, n.e.c.",1,3820,-1.1166346,.28752291,.2708084
+Surgical and medical instruments,1,3840,.63920832,.27024072,.27737251
+Surgical appliances and supplies,1,3840,.3521494,.54630029,.44775504
+Dental equipment and supplies,1,3840,-.008858297,.34793335,.1818638
+X-ray apparatus and tubes,1,3840,1.2572124,.26557535,.63207984
+Electromedical equipment,1,3840,2.9888055,.38724932,.33622944
+Ophthalmic goods,1,3850,-1.5837561,1.545579,1.1385998
+Photographic equipment and supplies,1,3860,-7.2315383,.015216607,.0368906
+"Watches, clocks, watchcases and parts",1,3870,-9.1501455,.39016658,1.8655571
+"Jewelry, precious metal",1,3910,-3.3441074,.91705906,.23664156
+Silverware and plated ware,1,3910,-5.6072063,1.9310776,.9251672
+Jewelers' materials and lapidary work,1,3910,-2.9206264,.189236,.36117145
+Musical instruments,1,3930,-.62845159,1.4575455,.82748538
+"Games, toys, and children's vehicles",1,3940,-7.5534844,4.5845671,2.9061215
+"Sporting and athletic goods, n.e.c.",1,3940,-2.2572191,1.7952926,1.1925433
+Pens and mechanical pencils,1,3950,-4.7279229,.93046999,.72931802
+Lead pencils and art goods,1,3950,-5.0609303,.80428588,.42641187
+Marking devices,1,3950,-3.1961102,.21334496,.13570003
+Carbon paper and inked ribbons,1,3950,-8.9156055,.097819716,.22691162
+Costume jewelry,1,3960,-7.6547117,2.6003923,1.0468212
+"Fasteners, buttons, needles, and pins",1,3960,-3.6582308,.37241,.44447413
+Brooms and brushes,1,3990,-2.7943544,1.9972022,1.2536144
+Signs and advertising specialities,1,3990,.53758109,.072556511,.039418649
+"Hard surface floor coverings, n.e.c.",1,3990,-3.2735083,.88829786,.25018293
+"Manufacturing industries, n.e.c.",1,3990,-.64378166,1.4635359,.77917784
+Buses and taxis,0,4111,2.9831762,,
+Trucking,0,4210,1.2681516,,
+Warehousing and storage,0,4221,3.8000336,,
+Water transportation,0,4410,.66682792,,
+Air transportation,0,4510,.1222701,,
+"Pipelines, n.e.c.",0,4619,.40429828,,
+Travel and tour agencies,0,4724,-1.697382,,
+Misc. transportation,0,4730,3.1672864,,
+Rental of railroad cars,0,4740,-5.7349048,,
+Misc. communication,0,4812,-.61507893,,
+Radio and television broadcasting,0,4830,-.50000584,,
+Cable and other pay TV services,0,4840,3.8064075,,
+Electric services,0,4910,-.69014025,,
+Gas utility services,0,4920,-3.2417049,,
+Water and sanitary services,0,4940,1.2206677,,
+Wholesale trade,0,5012,.28023636,,
+Retail trade,0,5210,.75342691,,
+Eating and drinking places,0,5812,1.9990281,,
+Depository institutions,0,6010,-.1542747,,
+Non-depository institutions,0,6110,1.0176437,,
+Security and commodity brokers,0,6210,3.6310992,,
+Insurance,0,6310,-.33443993,,
+"Insurance agents, brokers, and service",0,6400,.85477924,,
+Real estate,0,6510,1.2052789,,
+Non-profits,0,6732,2.3017709,,
+Hotels and motels,0,7010,1.0863113,,
+Miscellaneous lodging,0,7020,.24207537,,
+Laundry and garment services,0,7211,-1.2644073,,
+Misc. personal services,0,7220,1.8548748,,
+Beauty and barber shops,0,7230,1.3506665,,
+Funeral service and crematories,0,7260,.71656996,,
+Advertising,0,7311,1.0635803,,
+Business services,0,7322,2.4406881,,
+Commercial photography,0,7335,-3.6132121,,
+Building maintenance,0,7342,.98292571,,
+Equipment rental and leasing,0,7352,1.2432615,,
+Employment agencies,0,7361,5.4029427,,
+Computer services,0,7371,4.9460988,,
+Security services,0,7381,1.7734907,,
+Car and truck rental,0,7513,.78941852,,
+Parking and car washes,0,7520,2.8676479,,
+Auto repair,0,7532,1.1349304,,
+Electrical repair,0,7622,-.85473943,,
+"Clock, jewelry, and furniture repair",0,7630,-2.9286566,,
+Misc. repair,0,7692,-.43297893,,
+Motion pictures,0,7812,2.5296845,,
+Video tape rental,0,7840,-3.8203857,,
+Amusement and recreation,0,7910,3.7830789,,
+Theater and entertainment,0,7922,2.5693238,,
+Bowling centers,0,7930,-1.508938,,
+"Sports clubs, managers, and promoters",0,7941,5.7518063,,
+"Racing, including track operation",0,7948,.69556206,,
+Gyms and sports clubs,0,7991,3.2541766,,
+Doctors and dentists,0,8010,2.3446181,,
+"Clinics, labs, and health services",0,8042,4.4228029,,
+Nursing and personal care facilities,0,8050,2.6806324,,
+Hospitals,0,8060,1.1702769,,
+Home health care services,0,8080,5.7114573,,
+Legal services,0,8100,.63194054,,
+Elementary and secondary schools,0,8210,3.0286746,,
+Colleges and universities,0,8220,2.4720631,,
+Libraries and schools,0,8230,4.006186,,
+Social services,0,8320,4.8628101,,
+Job training and related services,0,8330,.79047745,,
+Child day care services,0,8350,3.4853055,,
+Residential care,0,8360,1.6296921,,
+Professional organizations,0,8610,.79836416,,
+Labor and civic organizations,0,8630,-1.6259855,,
+Religious organizations,0,8660,1.8945946,,
+"Engineering, architectue, surveying",0,8711,1.3793095,,
+"Accounting, auditing, bookkeeping",0,8720,2.6034119,,
+Commercial research and testing,0,8731,2.337198,,
+Business consulting,0,8741,3.8748736,,
