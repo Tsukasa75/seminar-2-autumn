@@ -84,6 +84,8 @@ tableone::CreateTableOne(
   data=dataf
 )
 
+t_value = ()/ 
+
 
 ## 2.3 変数間の関係性の把握
 
