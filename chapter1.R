@@ -1,8 +1,6 @@
 library(tidyverse)
 setwd("/Users/ebuchitsukasa/Desktop/university/seminar/seminar2autumn")
 
-1+2
-
 x <- 1
 y <- 2
 z <- 7
@@ -14,7 +12,7 @@ head(data, 10) # 最初の6行だけ出力
 
 glimpse(dataf) # package of tidyverse
 
-data$rent # print column of rent
+dataf$rent # print column of rent
 
 ## 1.7 データ操作の基本
 

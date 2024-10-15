@@ -84,9 +84,38 @@ tableone::CreateTableOne(
   data=dataf
 )
 
+# t値を計算
 t_value = ()/ 
 
 
 ## 2.3 変数間の関係性の把握
 
 # 2.3.1 散布図・相関係数
+  
+# 2.3.2 Rによる散布図と相関係数の計算
+library("tidyverse")
+library(gridExtra)
+
+
+plot1 <- ggplot(data=dataf, aes(x=age, y=rent_total)) + geom_point()
+plot2 <-ggplot(data=dataf, aes(x=floor, y=rent_total)) + geom_point()
+
+grid.arrange(plot1, plot2, ncol=2)
+
+# 画像を保存
+png(file="geom_point_of_age_floor_rent_total.png", width=400, height=300)
+
+plot1 <- ggplot(data=dataf, aes(x=age, y=rent_total)) + geom_point()
+plot2 <-ggplot(data=dataf, aes(x=floor, y=rent_total)) + geom_point()
+
+grid.arrange(plot1, plot2, ncol=2)
+
+dev.off()
+
+# 相関係数を計算
+
+cor(dataf$rent_total, dataf$floor, use="pairwise.complete.obs")
+
+dataf_cor <- dataf %>% dplyr::select(rent, dist, age, floor) 
+
+cor(dataf_cor, use="pairwise.complete.obs")
