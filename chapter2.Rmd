@@ -1,15 +1,125 @@
 1.  東京城南地区および川崎市の賃貸物件データ(rent-jonan-kawasaki.csv)を用いて以下の表を作成したい。
 
+```{r}
+# 下準備
+setwd("/Users/ebuchitsukasa/Desktop/university/seminar/seminar2autumn")
+library("dplyr")
+
+
+dataf <- read.csv("/Users/ebuchitsukasa/Desktop/university/seminar/seminar2autumn/data-script/chapter2/rent-jonan-kawasaki.csv")
+```
+
 (1)鉄道路線別オートロック付き物件の比率
+
+```{r}
+prop.table(table(dataf$autolock, dataf$line), margin=2)
+prop.table(table(dataf$line, dataf$autolock), margin=1)
+```
 
 (2)鉄道沿線別の平均賃貸料、平均築年数、平均専有面積
 
+```{r}
+# p54 group_byを使用
+dataf %>% 
+  dplyr::group_by(line) %>% 
+    summarize(
+      avg_rent = mean(rent),
+      avg_age = mean(age),
+      avg_floor = mean(floor),
+    )
+
+# xtabsを使う方法もあるらしい
+```
+
 (3)賃貸料を3万円刻みの度数分布表を作成し、また鉄道沿線別にヒストグラムを作成せよ
+
+```{r}
+dataf <- dataf %>% dplyr::mutate(
+  r_category=
+    case_when(
+      rent<0 ~ "-03",
+      rent>=3&rent<6 ~ "03-06",
+      rent>=6&rent<9 ~ "06-09",
+      rent>=9&rent<12 ~ "09-12",
+      rent>=12&rent<15 ~ "12-15",
+      rent>=15&rent<18 ~ "15-18",
+    )
+)
+
+table(dataf$r_category)
+
+barplot(table(dataf$r_category))
+```
+
+```{r}
+hist(dataf$rent, breaks=seq(0, 21, 3))
+```
 
 (4)東急沿線物件に限定し、賃貸料、1平方メートル当たり賃貸料と駅からの時間距離(徒歩分数とバス諸城時間の合計)、ターミナルからの所要時間の相関係数行列 なお、賃貸料は、賃貸料(rent)と管理費(service)の合計として再定義して計算すること。
 
+```{r}
+# 相関係数行列
+dataf <- dataf %>% dplyr::mutate(
+  rent_total=rent+service,
+  rent_per_square_meter=rent/floor,
+  distance=walk+bus,
+)
+
+dataf_cor <- dataf %>% dplyr::select(rent_total, rent_per_square_meter, distance)
+
+cor(dataf_cor, use="pairwise.complete.obs")
+```
+
 2.  東京大学社会科学研究所附属社会調査・データアーカイブ研究センターは、東大社研若年者パネル調査を実施しているが、そのデータをもとにした擬似データを公開しています(非制限擬似データ)。東大社研若年者パネル調査は、2006年12月末現在で20歳から34歳のいわゆる「若年層」を追跡した調査です。非制限擬似データは　2007年の灯台社研若年者パネル調査から1000ケースを無作為抽出した上で、変数を大幅に減らし、回答には無作為ノイズを混入させて割くせされた教育演習用のデータです。このデータを使って以下の変数、および表を作成してみましょう。
+
+```{r}
+# 下準備
+
+dataf2 <- read.csv("/Users/ebuchitsukasa/Desktop/university/seminar/seminar2autumn/data-script/chapter2/u001/u001.csv")
+```
 
 (1)調査票の学歴に関連する質問項目ZQ23AとZQ24を参照して、大卒・大学院卒なら"univ"、それ以外なら"others"の変数、univを作成せよ。また、支持政党に関する質問項目ZQ42を参照しながら自民党支持なら"LDP"、そうでなければ"others"をとる変数LDPを作成せよ。また、大卒・院卒とそれ以外で、自民党を支持する人の比率を計算せよ。
 
-(2)「普段収入になる仕事をしている人」(ZQ03=21)かつ「既婚(配偶者)」(ZQ50==2)の「男性」(sex==1)に限定したデータフレームを作成し、大卒・院卒とそれ以外で家事をする人の比率を比べたい。家事についてはZQ54A\~ZQ54Dに注目して「食事の用意」、「選択」、「家の掃除」「日用品・食用品の買い物」を「毎日する」人とそれ以外の人に分けて、大卒・院卒×家事の実施の有無の比率の表を作成せよ。
+```{r}
+# 2.1 変数の作成、比率の計算
+
+dataf2 <- dataf2 %>% dplyr::mutate(
+  univ=
+    case_when(
+      (ZQ23A==5|ZQ23A==6)&ZQ24==1 ~ "univ",
+      .default = "others",
+    ),
+  LDP=
+    case_when(
+      ZQ42==1 ~ "LDP",
+      .default = "others",
+    )
+)
+
+dataf2$univ <- factor(dataf2$univ, levels=c("univ", "others")) # 並び替え
+
+prop.table(table(dataf2$univ, dataf2$LDP), margin=1)
+prop.table(table(dataf2$LDP, dataf2$univ), margin=1)
+```
+
+(2)「普段収入になる仕事をしている人」(ZQ03==1)かつ「既婚(配偶者)」(ZQ50==2)の「男性」(sex==1)に限定したデータフレームを作成し、大卒・院卒とそれ以外で家事をする人の比率を比べたい。家事についてはZQ54A\~ZQ54Dに注目して「食事の用意」、「選択」、「家の掃除」「日用品・食用品の買い物」を「毎日する」人とそれ以外の人に分けて、大卒・院卒×家事の実施の有無の比率の表を作成せよ。
+
+```{r}
+# 限定したデータフレームの作成
+conditional_dataf2 <- dataf2 %>% dplyr::filter(
+  ZQ03==1&ZQ50==2&sex==1
+)
+
+conditional_dataf2 <- conditional_dataf2 %>% dplyr::mutate(
+  household_category=case_when(
+    ZQ54A==1&ZQ54B==1&ZQ54C==1&ZQ54D==1 ~ "every day",
+    .default = "others",
+  )
+)
+
+# 比率の計算
+prop.table(
+  table(conditional_dataf2$univ, conditional_dataf2$household_category),
+  margin=1
+)
+```

@@ -48,7 +48,7 @@ dataf96 <- dataf %>% dplyr::filter(year==1996)
 barplot(table(dataf96$r_category), xlab="rent_total", ylab="count")
 
 
-dataf96 <- dataf %>% dplyr::filter(year==2004)
+dataf04 <- dataf %>% dplyr::filter(year==2004)
 barplot(table(dataf96$r_category), xlab="rent_total", ylab="count")
 
 ## 2.2.2 Rによる計算方法
@@ -108,9 +108,15 @@ png(file="geom_point_of_age_floor_rent_total.png", width=400, height=300)
 plot1 <- ggplot(data=dataf, aes(x=age, y=rent_total)) + geom_point()
 plot2 <-ggplot(data=dataf, aes(x=floor, y=rent_total)) + geom_point()
 
-grid.arrange(plot1, plot2, ncol=2)
+plot3 <- grid.arrange(plot1, plot2, ncol=2)
 
 dev.off()
+
+# ggplot::ggsave()を使うと挟み込まず、デフォルトで解像度が高い画像を保存できる
+
+ggplot2::ggsave("test.png", plot=plot3)
+ggplot2::ggsave("test.pdf", plot=plot3, device=pdf)
+
 
 # 相関係数を計算
 

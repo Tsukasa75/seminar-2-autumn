@@ -1,0 +1,143 @@
+# 第４章　離散選択モデル・質的データの分析
+
+## 4.1.3 Rによるロジット、プロビット・モデルの推定法
+
+下準備
+
+```{r}
+# DescToolsのインストール
+install.packages("DescTools")
+```
+
+```{r}
+# ライブラリの読み込み
+library(wooldridge)
+library(DescTools)
+library(dplyr)
+```
+
+データの読み込み
+
+```{r}
+# mrozを環境にロード
+data(mroz, package='wooldridge')
+```
+
+プロビット・ロジットの推計は、以下のglm関数を用いて行う
+
+```         
+model_logic <- glm(y~x1+x2+x3, family=binominal(link="logit"), data=データフレーム名)
+```
+
+```         
+model_logic <- glm(y~x1+x2+x3, family=binominal(link="probit"), data=データフレーム名)
+```
+
+擬似決定係数は DescTools の PseudoR2() 関数で計算できる
+
+```         
+DescTools::PseudoR2(model_probit)
+```
+
+どんな既婚女性が就業しているか分析するためのモデルを推計する。
+
+-   被説明変数
+
+    -   inlf：既婚女性が就業していれば1, そうでなければ0
+
+-   説明変数
+
+    -   age：年齢
+
+    -   educ：教育年数
+
+    -   kidslt6：6歳未満の子供の数
+
+    -   kidsge6：６歳以上の子供の数
+
+```{r}
+table(mroz$inlf)
+
+```
+
+この table 関数から、就業している既婚女性数は428, 残りの325人が就業していないことがわかる。
+
+### 最小二乗法による推定結果と予測値
+
+最小二乗法で予測値がどうなるか確認してみる。
+
+```{r}
+result0 <- lm(inlf~age+educ+kidslt6+kidsge6, data=mroz)
+summary(result0)
+```
+
+次に、予測値を計算してみる。用いる関数は以下の通り。
+
+-   dplyr::mutate()
+
+-   predict()
+
+```{r}
+# 予測値の計算
+mroz <- mroz %>% dplyr::mutate(y_hat=predict(result0))
+summary(mroz$y_hat)
+```
+
+被説明変数 $\hat{y}$ は $0<=\hat{y}<=1$ のはずだが、最小値がマイナスになったり、最大値が 1 を超えたりしてしまっている。
+
+### ロジット、プロビット・モデルの推定結果と予測値
+
+次に、ロジット・モデルの推計結果を見てみる。
+
+```{r}
+result1 <- glm(
+  inlf~age+educ+kidslt6+kidsge6,
+  family = binomial(link="logit"), data=mroz
+)
+plot(result1)
+summary(result1)
+```
+
+結果の見方
+
+-   通常の最小二乗法と同じ
+
+-   ただし、t値の代わりにz値が用いられている
+
+    -   t検定...母集団が未知の正規分布に従う
+
+    -   z検定...母集団が既知の正規分布に従う
+
+<details>
+<summary>(ちょっと外れますが、一応出力してみたグラフについて)</summary>
+
+-   Residuals vs Fitted
+
+    -   残差(Residuals)と予測値(Fitted)の関係をプロットしたもの
+
+        -   縦軸：残差
+
+        -   横軸：予測値
+
+-   Q-Q residuals
+
+    -   論的な正規分布に従う場合の理論値（Theoretical Quantiles）と、モデルの標準化残差（Standardized residuals）を比較したプロット
+
+-   Scale-Location
+
+    -   標準化残差（Standardized residuals）の平方根と予測値の関係をプロットしたものです。
+
+        -   縦軸：残差の平方根
+
+        -   横軸：予測値
+
+-   Residuals vs Leverage
+
+    -   残差とレバレッジ（Leverage）の関係をプロットしたもの
+
+        -   縦軸：標準化された残差
+
+        -   横軸：レバレッジ（データ点がモデルの適合に与える影響の度合い）
+
+    -   目的：外れ値や影響力の高い点を特定する
+</details>
