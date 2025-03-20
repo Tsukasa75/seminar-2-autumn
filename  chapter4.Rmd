@@ -1,19 +1,26 @@
+---
+---
+---
+
 # 第４章　離散選択モデル・質的データの分析
 
 ## 4.1.3 Rによるロジット、プロビット・モデルの推定法
 
 下準備
 
-```{r}
-# DescToolsのインストール
+```{r, eval=FALSE, message=FALSE}
+# この章で使用するライブラリのインストール
 install.packages("DescTools")
+install.packages("mfx")
 ```
 
-```{r}
+```{r, message=FALSE}
 # ライブラリの読み込み
 library(wooldridge)
 library(DescTools)
 library(dplyr)
+library(mfx)
+library(modelsummary)
 ```
 
 データの読み込み
@@ -108,7 +115,12 @@ summary(result1)
 
     -   z検定...母集団が既知の正規分布に従う
 
+-   係数の符号と統計的な優位性は先ほどの最小二乗法の結果と同じになっている
+
+Q なんでt検定ではなくz検定になった？
+
 <details>
+
 <summary>(ちょっと外れますが、一応出力してみたグラフについて)</summary>
 
 -   Residuals vs Fitted
@@ -140,4 +152,298 @@ summary(result1)
         -   横軸：レバレッジ（データ点がモデルの適合に与える影響の度合い）
 
     -   目的：外れ値や影響力の高い点を特定する
+
 </details>
+
+ロジット・モデルで予測確率を計算してみる。その際、 predict() 関数にtype="response" というオプションが必要になる。
+
+```{r}
+mroz <- mroz %>% 
+  dplyr::mutate(prop_res1=predict(result1, type="response"))
+summary(mroz$prop_res1)
+```
+
+type="response" について
+
+predict() はデフォルトでは線形予測子を返すので、以前の線形回帰ではそのままでよかったが、今回のように2値選択の被説明変数を扱うロジット・モデルでは type="response" を指定して、逆ロジット変換を行なうことにより予測確率を取得する必要がある。type="response" を指定した時の predict() 関数の流れとしては以下の通り。
+
+1.  線形予測子を返す(本来は対数をとっている？)
+2.  線形予測子に逆ロジット変換が適用される
+3.  確率値が返される
+
+### 擬似決定係数の出力
+
+擬似決定係数同様、値が 1 に近いほど説明力が高いと解釈する。擬似決定係数は以下の通り。
+
+```{r}
+DescTools::PseudoR2(result1)
+```
+
+ただし、低いとダメというわけではなく、複数の分析結果を比較する際に用いられる。
+
+### 限界効用の計算
+
+ここまでみてきた推定結果では、係数の大きさには特に意味を持たない。説明変数が 1 大きくなったとき、確率がどの程度変化するかは、限界効用に注目する必要がある。
+
+使用するパッケージは mfx で、限界効用の計算方法は以下の通り。
+
+```         
+logitmfx(y~x1+x2+x3, data=オブジェクト名)
+probitmfx(y~x1+x2+x3, data=オブジェクト名)
+```
+
+lm 関数や glm 関数との違いは、出力時に summary 関数を使わずに、実行時に結果を出力できる点。
+
+```{r}
+# ロジット・モデルの限界効果
+res1_mfx <- logitmfx(inlf~age+educ+kidslt6+kidsge6, data=mroz)
+res1_mfx
+```
+
+結果の解釈の例
+
+-   age：教育年数が 1 年延びると就業している確率が 0.0484136, つまり 4.84136% 上昇する
+
+### プロビットモデルの推計結果
+
+```{r}
+result2 <- glm(inlf~age+educ+kidslt6+kidsge6, family=binomial(probit), data=mroz)
+summary(result2)
+```
+
+補足：プロビット・モデルの係数を 1.6 倍するとロジット・モデルの係数とほぼ等しくなることが知られている。
+
+例：今回のプロビットの age の係数 -0.03826 を 1.6 倍すると -0.06121 になり、ロジットの age の係数 -0.06338 とほぼ等しくなる
+
+次に、擬似決定係数を見ていく
+
+```{r}
+DescTools::PseudoR2(result2)
+```
+
+ロジットモデルの擬似決定係数とほとんど変わらない。
+
+次に、限界効果を見ていく。
+
+```{r}
+# プロビット・モデルの限界効果
+res2_mfx <- probitmfx(inlf~age+educ+kidslt6+kidsge6, data=mroz)
+res2_mfx
+```
+
+ロジット・モデルとほぼ同じ結果を出力している。(どういう計算過程なのか気になった)
+
+### 結果表の出力, および頑健な標準誤差の出力
+
+推計結果をまとめて出力する際は msummary() を使用する。不均一分散に対して「頑健な標準誤差」を表示させたい場合は、オプションとして vcov="HC1" を使用する。
+
+```{r}
+regs <-
+  list(
+    "model1" <- glm(inlf~age+educ+kidslt6+kidsge6, family=binomial(link=logit), data=mroz),
+    "model2" <- glm(inlf~age+educ+kidslt6+kidsge6, family=binomial(link=probit), data=mroz)
+  )
+modelsummary::msummary(regs, stars = TRUE, gof_omit='AIC|BIC|Log.Lik. |F', vcov = "HC1")
+```
+
+EXCEL に出力したい場合は以下のようにする。
+
+```{r, eval=FALSE}
+res_table <- modelsummary::msummary(regs, stars=TRUE, gof_omit = 'AIC|BIC|Log.Lik. |F', vcov = "HC1", output="data.frame")
+openxlsx::write.xlsx(res_table, "result.xlsx")
+```
+
+### 4.2 打ち切りデータの分析：トービット・モデル
+
+### 4.2.1 トービット・モデルとは
+
+0か0以上かについてはプロビット・モデル, 0以上なら線形回帰モデルが使用される。
+
+### 4.2.2 Rによるトービット・モデルの推定
+
+mroz データを使って、既婚女性の年間労働時間 hours の決定要因について分析してみる。
+
+まずは基本統計量を見てみる。
+
+```{r}
+summary(mroz$hours)
+```
+
+次に、就労している人だけで労働時間の平均を見てみる。
+
+```{r}
+# 就業女性に限定して労働時間 hours の平均値を計算
+mroz %>% dplyr::filter(inlf==1) %>% summarise(m_hours=mean(hours))
+```
+
+次に、トービット・モデルを推計する。いくつか用意されている関数のうち、 censReg() 関数を用いる。書き方は、
+
+```         
+censReg(y~x1+x2+x3, left=打ち切り点, data=データフレーム名)
+```
+
+censRegをインストールし、パッケージを読み込む
+
+```{r, message=FALSE}
+library(censReg)
+```
+
+```{r}
+res_tobit1 <- censReg::censReg(hours~age+educ+kidslt6+kidsge6, left=0, data=mroz)
+summary(res_tobit1)
+```
+
+係数を評価する際には margEff() 関数を使って限界効果を計算する必要がある。
+
+```{r}
+summary(margEff(res_tobit1))
+```
+
+最小二乗法と比較してみると
+
+```{r}
+result_ols <- lm(hours~age+educ+kidslt6+kidsge6, data=mroz)
+summary(result_ols)
+```
+
+最小二乗法とトービット・モデルでは値が上下している。
+
+### その他の離散選択モデル
+
+1.  被説明変数が複数の値をとる：多項ロジット、条件付きロジット・モデル
+2.  被説明変数が序列を持つ値になっている：順序ロジット、順序プロビット・モデル
+3.  被説明変数のゼロの値が著しく多い：ポアソン回帰、負の二項分布回帰
+4.  一部の被説明変数が観察できない：サンプル・セレクション・モデル
+5.  期間を被説明変数とする分析：ハザード・モデル
+
+## 練習問題
+
+### 1. 自民党支持の決定要因分析
+
+東大社研若年者パネル調査の公開データには支持政党に関する調査項目が含まれている。このデータを用いて自民党支持の決定要因を分析したい。
+
+※ 使用するデータは political_party.csv
+
+```{r, message=FALSE}
+# データの読み込み
+dataf <- readr::read_csv("~/Desktop/university/seminar/seminar2autumn/data-script/chapter4/political_party.csv")
+```
+
+1.  被説明変数にLDP（自民党支持ダミー）, 説明変数に女性ダミー（female）, 教育年数（educ）, 結婚ダミー（marriage）, 年収（income）, 年齢（age）, 伝統的家族観（value_family）, 社会階層（social_class）を説明変数として最小二乗法で回帰分析を実施せよ。また、予測値を計算し、予測値の最大値・最小値を調べよ
+
+    ```{r}
+    # 最小二乗法
+    res_ols1_1 <- lm(LDP~female+educ+marriage+income+age+value_family+social_class, data = dataf) 
+    summary(res_ols1_1)
+
+    ```
+
+    ```{r}
+    # 予測値と予測値の最大・最小値
+    dataf <- dataf %>% dplyr::mutate(y_hat=predict(res_ols1_1))
+    summary(dataf$y_hat)
+    ```
+
+2.  (1)と同じ式をロジットモデルで推計せよ。その予測確率を計算し、最大値・最小値を確認せよ。
+
+    ```{r}
+    # ロジットモデルでの推計結果
+    res_logit1_2 <- glm(
+      LDP~female+educ+marriage+income+age+value_family+social_class, family=binomial(link="logit"), data = dataf
+    )
+
+    summary(res_logit1_2)
+    # ロジットモデルでの予測確率, 最大値・最小値
+    dataf <- dataf %>% 
+        dplyr::mutate(prop_res1=predict(res_logit1_2, type="response"))
+    summary(mroz$prop_res1)
+    ```
+
+3.  (2)の推計結果から、どのような人が自民党を支持していると考えられるか。
+
+    係数のうち、少なくとも 5% 水準で有意なのは、 age, value_family, social_class である。これらはいずれも係数がプラスである。これらから、 「年齢が高いほど」、「伝統的家族観を強く持つほど」、「社会的階層が高いと思っているほど」自民党を支持していると考えられる。
+
+### 2. 福利厚生に恵まれた仕事に就く人の属性を調べる
+
+企業は従業員に給与以外にもフリンジ・ベネフィット（fringe benefit）と呼ばれる福利厚生を支給します。この練習問題では、福利厚生に恵まれた仕事に就く人の属性を調べます。使用するデータでは 1977 年に米国で実施された福利厚生に関するサーベイ調査のデータ 616 件で、 Wooldridge(2010) の演習用データとして配布されているデータです。パッケージ wooldridge をインストールした上でスクリプトに以下のように記載することでデータを利用できます。
+
+```         
+data(fringe, package='wooldridge')
+```
+
+また WEB サポートで提供している fringe.csv でも同じ計算が可能です。
+
+```{r}
+# データの読み込み
+data(fringe, package = 'wooldridge')
+```
+
+1.  hrben（労働時間あたりの福利厚生支給額）と pension（福利厚生支給額のうち年金）がゼロのサンプル数を調べよ。
+
+    ```{r}
+    sum(fringe$hrbens==0)
+    sum(fringe$pension==0)
+    ```
+
+2.  被説明変数を hrbens, 説明変数には age（年齢）, educ（教育年数）, married（既婚ダミー）, white（白人ダミー）, male（男性ダミー）とする式を最小二乗法とトービットモデルで推定し、その結果を比較せよ。
+
+    ```{r}
+    # 最小二乗法
+    res_ols2 <- lm(hrbens~age+educ+married+white+male, data=fringe)
+    summary(res_ols2)
+    ```
+
+    ```{r}
+    # トービットモデル
+    res_tobit2 <- censReg::censReg(hrbens~age+educ+married+white+male, left=0, data=fringe)
+    summary(res_tobit2)
+    ```
+
+    結果の比較
+
+    -   有意性について
+
+        -   どの説明変数の有意性も変わらない。
+
+            -   white 以外少なくとも 1% の有意水準を満たしている。
+
+    -   係数について
+
+        -   1割前後しか変わらない
+
+3.  (2)の推定式の被説明変数を pension に変更して、最小二乗法とトービットモデルで推定し、その係数を比較せよ。
+
+    ```{r}
+    # 最小二乗法
+    res_ols3 <- lm(pension~age+educ+married+white+male, data=fringe)
+    summary(res_ols3)
+    ```
+
+    ```{r}
+        # トービットモデル
+        res_tobit3 <- censReg::censReg(pension~age+educ+married+white+male, left=0, data=fringe)
+        summary(res_tobit3)
+    ```
+
+    結果の比較
+
+    -   有意性について
+
+        -   どの説明変数の有意性も変わらない。
+
+    -   係数について
+
+        |         | ols     | tobit |
+        |---------|---------|-------|
+        | age     | 8.820   | 11.58 |
+        | educ    | 65.036  | 85.59 |
+        | married | 85.731  | 140.2 |
+        | white   | 84.622  | 116.9 |
+        | male    | 334.438 | 384.0 |
+
+        -   全体的にトービットモデルの方が係数が高くなっている。
+        -   0でならされていた係数の値が、0を除くことによって高くなった。
+
+```{r}
+summary(margEff(res_tobit3))
+```

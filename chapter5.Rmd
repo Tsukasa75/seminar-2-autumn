@@ -1,0 +1,350 @@
+# 第５章　差の差の分析とパネル・データ分析
+
+```{r}
+# 下準備
+library(readr)
+```
+
+## 5.1 前後比較と差の差の分析
+
+-   前後比較分析
+
+    -   国や自治体、企業でよく行われるが、**信頼性の低い手法**である。
+
+-   差の差の分析
+
+    -   前後の比較を、参加者・非参加者でとることからこの手法は**エビデンス・レベルの高い, すなわち質の高い手法**だとされている。
+
+### 5.1.1 差の差の分析による政策効果の分析
+
+### 5.1.2 都市開発の効果の分析
+
+回帰分析で次のような式を推計する。
+
+$$
+Y_{it}=α+β_1Treat_i+β_2After_i+β_3Treat_i*After_i+β_4X_{it}+ε_{it}
+$$
+
+ここで、変数は以下の通り。
+
+-   被説明変数
+
+    -   $Y_{it}$ ：成果指標（賃貸料）
+
+-   説明変数
+
+    -   $Treat_i$ ：処置群ダミー
+
+    -   $After_i$ ：処置期間後ダミー
+
+    -   $Treat_i*After_i$ ：処置群ダミーと処置期間後ダミーの交差項
+
+        -   交差項は、グループ間で係数が異なるかもしれないことを考慮して説明変数に入れている（p107参照）。
+
+        -   この交差項の係数が**差の差の分析の処置効果**になる。
+
+    -   $X_{it}$ ：その他の説明変数（賃貸物件の属性）
+
+回帰分析による差の差の分析の表現
+
+-   処置群の賃貸料を $Y_T$ , 比較群の賃貸料を $Y_C$ とする。
+
+-   1996年と2004年の処置群の賃貸料及び2時点の差
+
+    -   $Y_{T, 1996}=α+β_1Treat$
+
+    -   $Y_{T, 2004}=α+β_1Treat+β_2Year2004+β_3Treat2004$
+
+    -   $(Y_{T, 2004}-Y_{T, 1996})=β_2Year2004+β_3Treat2004$ ・・・（３）
+
+    -   これは処置群の前後比較になっている
+
+-   1996年と2004年の比較群の賃貸料及び2時点の差
+
+    -   $Y_{C, 1996}=α$
+
+    -   $Y_{C, 2004}=α+β_1Treat+β_2Year2004$
+
+    -   $(Y_{C, 2004}-Y_{C, 1996})=β_2Year2004$　・・・（４）
+
+    -   これは比較群の前後比較
+
+-   （３）と（４）の差をとると
+
+    -   $(Y_{T, 2004}-Y_{T, 1996})-(Y_{C, 2004}-Y_{C, 1996})=β_3Treat2004$
+
+    -   これは「処置群の差」と「比較群の差」になるので、**差の差の分析の因果効果推定量**に相当する。
+
+スクリプトで見ていく。使用データは rend-odakyu-eonoshima96-04.csv
+
+```{r, echo=FALSE, message=FALSE}
+# 下準備
+library(dplyr)
+library(readr)
+library(modelsummary)
+dataf <- readr::read_csv("~/Desktop/university/seminar/seminar2autumn/data-script/chapter5/rent-odakyu-enoshima96-04.csv")
+dataf <- dataf %>% dplyr::mutate(
+  rent_total=rent+service,
+  dist=bus+walk
+)
+```
+
+```{r}
+# treatダミー作成
+dataf <- dataf %>% dplyr::mutate(
+  treat=if_else(station=="Shonandai", 1, 0)
+)
+# treat*2004年ダミー作成
+dataf <- dataf %>% dplyr::mutate(
+  treat2004=if_else((station=="Shonandai"&year==2004), 1, 0)
+)
+# 2004ダミー作成
+dataf <- dataf %>% dplyr::mutate(
+  year2004=if_else(year==2004, 1, 0)
+)
+# 前後比較分析(湘南台限定)
+result1 <- estimatr::lm_robust(rent_total~floor+age+dist+treat2004, data=dataf, station=="Shonandai")
+summary(result1)
+# 差の差の分析
+result2 <- estimatr::lm_robust(rent_total~floor+age+dist+treat+year2004+treat2004, data=dataf)
+summary(result2)
+results <- list(
+  "model1" = lm(rent_total~floor+age+dist+treat2004, data=dataf, station=="Shonandai"),
+  "model2" = lm(rent_total~floor+age+dist+treat+year2004+treat2004, data=dataf)
+)
+modelsummary::msummary(results, stars=TRUE, gof_omit='RMSE|AIC|BIC|Log.Lik.|F', vcov="HC2")
+```
+
+estimatr::lm_robust()では頑健な標準誤差(誤差項は不均一分散であると仮定)を使用している。
+
+テキストのlm_robustではサンプル数がほとんど同一になってしまうので、lm_robustではなくmusummaryのオプションでvcov修正を加えている。（誤植修正ページを参照）
+
+## 5.2 パネル・データによる差の差の分析
+
+### 5.2.1 パネル・データとは何か
+
+### 5.2.2 パネル・データ利用のメリット：何がわかるのか
+
+### 5.2.3 プーリング回帰モデル
+
+パネル・データを用いつつも、個々の個体を追跡できるという特性を考慮せずに推定する回帰モデルを**プーリング回帰モデル**という。
+
+### 5.2.4 固定効果モデル（Fixed Effect Model）
+
+$Y_{it}=α+β*X_{it}+u_i+ε_{it}$ ・・・（５）
+
+この各都道府県の特性 $u_i$ を回帰分析に取り込むための方法の一つに、 $u_i$ を各都道府県のダミー変数に置き換える方法がある。各都道府県で傾きが等しい近似線を引いた時、各都道府県で切片が異なると考える場合、各都道府県のダミー変数 D を追加することでこれを回帰式で表現することができる。この各都道府県のダミー変数 D のことを**固定効果（Fixed Effect）**とよび、固定効果を含む回帰モデルのことを**固定効果モデル（Fixed Effect Model）と呼ぶ。**
+
+$Y_{it}=α+βX_{it}+γ_1D_1+γ_2D_2+...+ε_{it}$ ・・・（６）
+
+この各都道府県のダミー変数の係数は、観察されない各都道府県の特性を表し、説明変数としても考慮されていない経済的・文化的・習慣的な要因を表すと解釈される。
+
+次に考慮すべきこととして、マクロ的な要因が働いているかどうかがある。　例えば、女性の育休が2000年代には推進されたが、これによって全国的に母親の就業率が上昇した可能性がある。全国的に母親就業率が10%程度上昇したなら、同じように10%程度差し引いて各都道府県の施策の効果を推し量る必要がある。
+
+パネル・データによる回帰モデルで「全国平均の伸び率」を調整するには、**時点ダミー（時間固定効果）**を導入する。今回の例であれば、2010年であれば 1 をとるダミー変数を導入し、母親就業率のマクロ的なトレンドを考慮する。
+
+$Y_{it}=α+βX_{it}+γ_1D_1+γ_2D_2+...+τT_1+ε_{it}$\$
+
+このように個体固定効果と時間固定効果の両方を導入する回帰モデルは**二次元固定効果モデル**と呼ばれ、最近の実証分析では**標準的な推定方法**となっている。
+
+### Rによる固定効果モデルの推定
+
+では、Asai et al.(2015)で使われた実際のデータを使って母親就業率と保育所定員率の関係をchapter5-2-1.Rで分析してみる。
+
+-   使用データ：asai00-10.csv
+
+    -   含まれるデータ３つ
+
+        -   5年に一度実施される国勢調査（総務省）から得た母親就業率（emprate）
+
+        -   社会福祉行政業務報告（厚生労働省）から得た保育所定員率（caprate）
+
+        -   2000年, 2005年, 2010年
+
+以下の３つの回帰式を推定してみる。
+
+-   $Y_{it}=α+β*X_{it}+ε_{it}$ ・・・（８）
+
+    -   固定効果を一切含めないプーリング回帰
+
+-   $Y_{it}=α+β*X_{it}+τT_1+...+ε_{it}$ ・・・（９）
+
+    -   時点固定効果のみ
+
+-   $Y_{it}=α+β*X_{it}+γ_1D_1+γ_2D_2+γ_3D_3+...τT_1+...+ε_{it}$ ・・・（１０）
+
+    -   時点固定効果と個体効果の両方を含む
+
+```{r}
+# 下準備
+dataf <- readr::read_csv("~/Desktop/university/seminar/seminar2autumn/data-script/chapter5/asai00-10.csv")
+```
+
+```{r}
+estimatr::lm_robust(formula = emprate~caprate, data=dataf)
+
+```
+
+P値からこの係数は統計的に有意であると言えるが、この回帰式では固定効果を考慮していないので保育所定員率に因果効果があるとは言えない。
+
+```{r}
+estimatr::lm_robust(emprate~caprate+factor(year), data=dataf)
+```
+
+```{r, eval=FALSE}
+data <- dataf %>% dplyr::mutate(y2005=if_else(year==2005, 1, 0))
+data <- dataf %>% dplyr::mutate(y2010=if_else(year==2010, 1, 0))
+estimatr::lm_robust(emprate~caprate+y2005+y2010, data=dataf)
+```
+
+時間効果のみを入れた場合だと、caprateの係数は（４）式と比べるとやや小さくなっているものの、P値は小さく統計的に有意であることがわかる。
+
+次に、個体固定効果と時間固定効果の両方を含む（１０）式を推計してみる。
+
+```{r}
+estimatr::lm_robust(formula = emprate~caprate+factor(year)+factor(pref), data=dataf)
+```
+
+２つの固定効果を入れると、caprateの係数が0.1を下回り、P値も10%を上回ったので統計的な有意性が失われた。つまり、各都道府県固有の経済的・文化的特性と全国一律の政策変更や景気動向などの時点効果を考慮すると、保育所定員率の向上は母親就業率に影響しているとは言えないことがわかる。 lm_robust()関数に固定効果を入れるもう一つの書き方として、fixed_effectオプションを使い、
+
+```{r, eval=FALSE}
+estimatr::lm_robust(formula = emprate~caprate, fixed_effects = pref+year, data=dataf)
+```
+
+と書くこともできる。 なお、パネル・データ分析を行うときは fixest パッケージが便利である。固定効果モデルの推定は, feols()関数で実施可能である。
+
+```{r, echo=FALSE}
+library(fixest)
+```
+
+```{r, eval=FALSE}
+fixest::feols(Y~X1+X2+X3|固定効果, data=オブジェクト)
+```
+
+今回の例では、以下で可能である。
+
+```{r}
+fixest::feols(emprate~caprate|pref+year, data=dataf)
+```
+
+feolsは modelsummary() と組み合わせて使うことはできないが、fixest:etable() を用いて推計結果を表として出力することができる。
+
+```{r}
+result_feols1 <- fixest::feols(emprate~caprate, data=dataf)
+result_feols2 <- fixest::feols(emprate~caprate|year, data=dataf)
+result_feols3 <- fixest::feols(emprate~caprate|year+pref, data=dataf)
+fixest::etable(result_feols1, result_feols2, result_feols3, se.below = TRUE)
+```
+
+### 5.2.6 差の差の分析としての固定効果モデル
+
+この節では、固定効果モデルと差の差の分析の関係について説明する。ここでは単純化のためデータは2時点で時点固定効果を含めない(6)式を基に議論を進める。（６）式は、以下のようにt=1時点とt=2時点のXとYの関係である（１１−１）式と（１１−２）式として表すことができる。
+
+-   $Y_{i1}=α+β*X_{i1}+γ_1D_1+γ_2D_2+γ_3D_3+...+ε_{i1}$ ・・・（１１−１）
+-   $Y_{i2}=α+β*X_{i2}+γ_1D_1+γ_2D_2+γ_3D_3+...+ε_{i2}$ ・・・（１１−２）
+
+次に、(１１−１)から（１１−２）を引く。
+
+-   $Y_{i1}-Y_{i2}=ΔY_i=α+β*X_{i1}+γ_1D_1+γ_2D_2+γ_3D_3+...+ε_{i1}$
+
+-   $-(α+β*X_{i2}+γ_1D_1+γ_2D_2+γ_3D_3+...+ε_{i2})$
+
+-   $=β*ΔX_i+Δε_i$・・・(１１−３)
+
+(１１−３)式では、XとYはともに、2時点の差分をとった変数になっている。また、差分を取ることで時点間では変化しない定数項（切片）と個体ダミーは消えてしまう。これを**階差回帰モデル**と呼ぶ。この時の係数βの意味を考えてみる。係数βは、Xが1増加した時にYがどの程度変化するかを示すが、これは、Xが全く変動しなかったグループとXが1変動したグループの間で、Yの変化幅にどの程度差があるかを示していると考えることもできる。Xが全く変化しないグループを比較群、Xが1変化したグループを処置群とすると、係数βは処置群と比較群のYの変化幅の差になるので、差の差の分析になっていることがわかる。
+
+|        | Xの変化         | Yの変化 |
+|--------|-----------------|---------|
+| 処置群 | 1単位変化(ΔX=1) | b       |
+| 比較群 | 変化なし(ΔX=0)  | 0       |
+
+なお、5.1節では、処置群と比較群をダミーで区別する**離散変数の差の差分析**であった音痛いして、本節で紹介した分析では連続変数を用いているので、**連続変数の差の差の分析**と呼ぶ。
+
+パネル・データによる差の差の分析の特徴として3つ挙げる。
+
+1.  5.1節で、「差の差の分析では、1. 処置群ダミー, 2. 処置期間後ダミー, 3. 処置群ダミーと処置後ダミーの交差項を入れる」と説明があったが、**パネル・データによる差の差分析の場合、「処置群ダミー」と「処置後ダミー」の交差項のみ**を入れる。
+    -   理由は、処置群ダミーは個体固定効果と重複するので前者に吸収され、処置期間後ダミーは時点固定効果と重複し後者に吸収されてしまうから。
+2.  (１１−３)からもう１つ指摘できることとして、**固定効果モデルの場合、時間を通じて変化しない変数は、説明変数には加えられない**ということである。たとえば都市化の要素を考慮するため、三大都市圏ダミーや三大都市からの距離を追加したくても、だめ。
+3.  固定効果モデルによる差の差の分析では説明変数として導入できない第三の要因を考慮できるという利点がある。YにもXにも影響を与える、観察できない第三の要因を除去し、XとYの関係を計測できる。
+
+　5.1節で紹介した事例では、個体が追跡できないデータなのでブーリング回帰で差の差の分析を行っているが、パネル・データによる差の差の分析は第三の要因を排除することができるため、より強力なツールとなる。
+
+### 5.2.7 Rによる実例：自由貿易協定の効果についての差の差の分析
+
+　本節では、パネル・データで時間を通じて変化しない要因がどのように扱われるかを見ていく。具体的には、第３章の3.2.7項でも登場した国際貿易を分析するツールとしての重力モデルと、これを用いた地域貿易協定(FTA)の効果の測定を例として取り上げる。FTAは通常、FTAダミーによって分析されるので、**離散変数による差の差の分析**となる。
+
+　今回扱うはFTAの有無は**離散変数による差の差の分析**であり、以下を想定する。
+
+-   処置群：FTAが締結された二国間ペア
+
+-   比較群：FTAが締結されていない二国間ペア
+
+-   第三の要因：二石の元々の親密さ
+
+　ここで使用するデータは、1960年から2000年までの5年おきの二国間貿易学（Trade）や二国間の距離（Dist）, 輸出国、輸入国のGDPなど。
+
+　推計式は以下の通りで
+
+$$
+InTrade_{ijt}=α+βlnGDP_{ex, it}+β_2lnGDP_{im, jt}+β_3lnDist_{ij}+β_4Contig_{ij}+β_5Comlang{ij}+β_6FTA_{ij}+λ_t+μ_i+ε_{ij}
+$$
+
+説明変数
+
+-   輸出国、輸入国のGDP
+
+-   二国間ペアで国境を接していれば1を取るダミー(contig)
+
+-   公用語が共通であれば1を取るダミー(comlang)
+
+このうち、contig, comlangは時間を通じて変化しない変数なので添え字のtがついていないことに注意。ここに、
+
+-   FTAダミー(fta)
+
+-   時間固定効果( $λ_t$ )
+
+が追加されている。
+
+```{r, message=FALSE}
+dataf <- readr::read_csv("~/Desktop/university/seminar/seminar2autumn/data-script/chapter5/panel-gravity-data.csv")
+```
+
+```{r}
+dataf %>% dplyr::mutate(ltrade=log(tvalue/GDPdef_o)) -> dataf
+dataf1960 <- dplyr::filter(dataf, year==1960)
+dataf1970 <- dplyr::filter(dataf, year==1970)
+dataf1980 <- dplyr::filter(dataf, year==1980)
+dataf1990 <- dplyr::filter(dataf, year==1990)
+dataf2000 <- dplyr::filter(dataf, year==2000)
+m1960 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf1960)
+m1970 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf1970)
+m1980 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf1980)
+m1990 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf1990)
+m2000 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf2000)
+fixest::etable(m1960, m1970, m1980, m1990, m2000, se.below=TRUE)
+```
+
+ftaの係数に注目すると、1960年、1970年のFTAの係数は0.4, 0.9と正で大きな値となりましたが、1980年は非有意とはいえマイナスになっている。
+
+　次に、1960, 1965, ..., 2000年と5根の木、9時点のデータを使い、個体固定効果、年次固定効果（Year Fixed Effect, Year FE）を考慮したモデルを推計する。
+
+```{r, message=FALSE}
+result_feols1 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta, data=dataf)
+result_feols2 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta|year, data=dataf)
+result_feols3 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta|id, data=dataf)
+result_feols4 <- fixest::feols(ltrade~log(GDPR_o)+log(GDPR_d)+log(distw)+contig+comlang_off+fta|id+year, data=dataf)
+fixest::etable(result_feols1, result_feols2, result_feols3, result_feols4, se.below = TRUE)
+
+```
+
+　result_feols1は、プーリング回帰（固定効果を一切考慮しない推計）、result_feols2はresult_feols1に年次ダミー（Year Fixed Effect）を追加した結果で、FTAの係数はそれぞれ0.173, 0.39となった。一方、result_feols3では、二国間ペア・ダミー（Country Pair, CP）, result_feols4では、二国間ペア・ダミーと年次ダミーの両方を追加している。
+
+　二国間ペア・ダミーが含まれる result_feols3とresult_feols4では、ldist（距離の対数値）とcontig, comlabg_offの係数が消えている。**これらの変数は時間を通じて変化しない変数であるため、二国間ペア・固定効果によって吸収されてしまうため係数が得られない**（5.2.4節参照）
+
+### 事例紹介11 男女の競争心格差-競艇の成績データから
+
+$$
+Y_{it}=αM_{it}+βX_{it}+μ_i+u_{it}
+$$
+
+で、Yはレースタイム、Mは男女混合レース・ダミーや異性レーサーの数などレース参加者の性別構成を示す変数, Xはその他の説明変数、u_iはレーサー個人の固定効果です。
